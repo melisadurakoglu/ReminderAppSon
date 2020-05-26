@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="horizontal"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    android:background="@drawable/border">
+    <TextView
+        android:id="@+id/hashtag"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="#"
+        android:textSize="20sp"
+        android:textColor="#7FBFF3"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/etiketBaslik"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Etiket"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+</LinearLayout>
