@@ -218,9 +218,9 @@ public class HomeFragment extends Fragment implements CustomAdapter.OnNoteListen
                 notList.clear();
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                        Yapilacak not1 = ds.getValue(Yapilacak.class);
-                        if (not1 != null) {
-                            notList.add(not1);
+                        Yapilacak yapilacakGorev = ds.getValue(Yapilacak.class);
+                        if (yapilacakGorev != null) {
+                            notList.add(yapilacakGorev);
                             ds.getKey();
                         }
                     }

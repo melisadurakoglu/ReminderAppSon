@@ -32,13 +32,13 @@ public class EtiketFragment extends Fragment  implements CustomAdapter2.OnNoteLi
     List<Yapilacak> notList = new ArrayList<>();
     private RecyclerView recyclerView;
     private CustomAdapter2 mAdapter;
-    DatabaseReference myRef2;
+    DatabaseReference dbReference;
     CheckBox checkBox;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_etiket, container, false);
-        myRef2 = FirebaseDatabase.getInstance().getReference().child("yapilacaklar");
+        dbReference = FirebaseDatabase.getInstance().getReference().child("yapilacaklar");
         recyclerView = view.findViewById(R.id.recyclerview2);
         mAdapter = new CustomAdapter2(notList,this);
         checkBox=view.findViewById(R.id.checkbox);
@@ -55,15 +55,15 @@ public class EtiketFragment extends Fragment  implements CustomAdapter2.OnNoteLi
     public void onStart() {
         super.onStart();
         //attaching value event listener
-        myRef2.addValueEventListener(new ValueEventListener() {
+        dbReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 notList.clear();
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                        Yapilacak not1 = ds.getValue(Yapilacak.class);
-                        if (not1 != null) {
-                            notList.add(not1);
+                        Yapilacak yapilacakGorev = ds.getValue(Yapilacak.class);
+                        if (yapilacakGorev != null) {
+                            notList.add(yapilacakGorev);
                             ds.getKey();
                         }
                     }

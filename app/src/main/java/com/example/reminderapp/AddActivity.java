@@ -62,7 +62,6 @@ public class AddActivity extends AppCompatActivity {
         editTextEtiket = (EditText) findViewById(R.id.etiket);
         textViewTarih = (TextView) findViewById(R.id.textViewTarih);
         textViewSaat = (TextView) findViewById(R.id.textViewSaat);
-        //buttonKaydet = view.findViewById(R.id.buttonNotKaydet);
         btnTarih = (Button) findViewById(R.id.btnTarih);
         btnSaat = (Button) findViewById(R.id.btnSaat);
 
@@ -93,13 +92,10 @@ public class AddActivity extends AppCompatActivity {
                 calendar=Calendar.getInstance();
                 saat = calendar.get(Calendar.HOUR_OF_DAY);
                 dakika = calendar.get(Calendar.MINUTE);
-                //System.out.println("dakika"+dakika+"saat:"+saat);
                 TimePickerDialog tpd = new TimePickerDialog(AddActivity.this,
                         new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                                // hourOfDay ve minute değerleri seçilen saat değerleridir.
-                                // Edittextte bu değerleri gösteriyoruz.
                                 textViewSaat.setText(hourOfDay + ":" + minute);
                                 guncelSaat=hourOfDay;
                                 guncelDakika=minute;
@@ -144,11 +140,10 @@ public class AddActivity extends AppCompatActivity {
     private void createNotificationChannel(){
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
             CharSequence name="Reminder App";
-            String description="Açıklama buraya gelecek";
+            String description="Description";
             int importance= NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel=new NotificationChannel("notify",name,importance);
             channel.setDescription(description);
-
             NotificationManager notificationManager=getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
@@ -170,9 +165,9 @@ public class AddActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(Void aVoid) {
                     final AlertDialog.Builder alertDialog = new AlertDialog.Builder(AddActivity.this);
-                    alertDialog.setTitle("Not Eklendi");
+                    alertDialog.setTitle("Görev Eklendi");
                     alertDialog
-                            .setMessage("Not ekleme başarılı.")
+                            .setMessage("Görev ekleme başarılı.")
                             .setCancelable(false)
                             .setPositiveButton("Tamam", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
@@ -193,12 +188,12 @@ public class AddActivity extends AppCompatActivity {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(AddActivity.this, "HATA! Not ekleme başarısız", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddActivity.this, "Görev ekleme başarısız, tekrar deneyiniz.", Toast.LENGTH_SHORT).show();
                         }
                     });
 
         } else {
-            Toast.makeText(AddActivity.this, "Lütfen alanları doldurunuz.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddActivity.this, "Lütfen boş alanları kontrol ediniz.", Toast.LENGTH_SHORT).show();
         }
 
     }

@@ -24,10 +24,10 @@ public class CustomAdapter2 extends RecyclerView.Adapter<CustomAdapter2.MyViewHo
             super(v);
 
             this.onNoteListener = onNoteListener;
-            //Düzenlenecek layoutta
+
             etiketBaslik = v.findViewById(R.id.etiketBaslik);
             hashtag = v.findViewById(R.id.hashtag);
-            //Checkbox yeni eklendi.
+
             checkBox=v.findViewById(R.id.checkbox);
             v.setOnClickListener(this);
         }
@@ -38,7 +38,6 @@ public class CustomAdapter2 extends RecyclerView.Adapter<CustomAdapter2.MyViewHo
         }
     }
 
-    // Provide a suitable constructor (depends on the kind of dataset)
     public CustomAdapter2(List<Yapilacak> notList, OnNoteListener onNoteListener) {
         this.notList = notList;
         this.mOnNoteListener = onNoteListener;

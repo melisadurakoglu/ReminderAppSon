@@ -58,7 +58,6 @@ public class UpdateActivity extends AppCompatActivity {
         textViewSaatUpdate=findViewById(R.id.textViewSaat);
         textViewSaatUpdate.setText(sessionSaat);
         textViewNotDurumu=findViewById(R.id.durum);
-        //buttonUpdate = findViewById(R.id.buttonUpdateNot);
         buttonDelete = findViewById(R.id.btnSil);
         buttonTarih  = findViewById(R.id.btnTarih);
         buttonSaat   = findViewById(R.id.btnSaat);
@@ -92,12 +91,9 @@ public class UpdateActivity extends AppCompatActivity {
                         new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                                // hourOfDay ve minute değerleri seçilen saat değerleridir.
-                                // Edittextte bu değerleri gösteriyoruz.
                                 textViewSaatUpdate.setText(hourOfDay + ":" + minute);
                             }
                         }, hour, minute, true);
-                //datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
                 timePickerDialog.show();
             }
         });
@@ -106,13 +102,12 @@ public class UpdateActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String name=editTextName.getText().toString();
                 String description=spinnerGenre.getText().toString();
-                String message=description.concat(" \n Reminder App ile gönderildi.");
                 Intent sharingIntent=new Intent(Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
                 sharingIntent.putExtra(Intent.EXTRA_SUBJECT,name);
-                sharingIntent.putExtra(Intent.EXTRA_TEXT,message);
+                sharingIntent.putExtra(Intent.EXTRA_TEXT,description);
 
-                startActivity(Intent.createChooser(sharingIntent,"Share Using"));
+                startActivity(Intent.createChooser(sharingIntent,"Uygulama kullanarak paylaş"));
             }
         });
         buttonDelete.setOnClickListener(new View.OnClickListener() {
@@ -142,19 +137,7 @@ public class UpdateActivity extends AppCompatActivity {
 
             CheckBox checkBox = findViewById(R.id.updateCheckbox);
             if(checkBox.isChecked())  notDurumu = "1"; else notDurumu = "0";
-            /*
-            CheckBox checkBox = findViewById(R.id.checkbox);
-            if(checkBox.isChecked()){
-                textViewNotDurumu.setText("Görev Tamamlandı");
-                textViewNotDurumu.setTextColor(Color.parseColor("#008000"));
-            }
-            else{
-                textViewNotDurumu.setText("Görev Tamamlanmadı");
-                textViewNotDurumu.setTextColor(Color.parseColor("#FF0000"));
-            }
 
-
-             */
             if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(genre)) {
                 updateNot(sessionId, name, genre,tarih,saat,notDurumu);
 
@@ -167,7 +150,7 @@ public class UpdateActivity extends AppCompatActivity {
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference().child("yapilacaklar").child(id);
         Yapilacak artist = new Yapilacak(id, name, icerik,tarih,saat,notDurumu);
         dR.setValue(artist);
-        Toast.makeText(UpdateActivity.this, "Not Güncellendi.", Toast.LENGTH_LONG).show();
+        Toast.makeText(UpdateActivity.this, "Görev güncellendi.", Toast.LENGTH_LONG).show();
         Intent intent=new Intent(UpdateActivity.this,MainActivity.class);
         startActivity(intent);
         return true;
@@ -183,7 +166,7 @@ public class UpdateActivity extends AppCompatActivity {
                 for (DataSnapshot appleSnapshot: dataSnapshot.getChildren()) {
                     appleSnapshot.getRef().removeValue();
                 }
-                Toast.makeText(UpdateActivity.this, "Not silindi.", Toast.LENGTH_LONG).show();
+                Toast.makeText(UpdateActivity.this, "Görev silindi.", Toast.LENGTH_LONG).show();
                 Intent intent=new Intent(UpdateActivity.this,MainActivity.class);
                 startActivity(intent);
 

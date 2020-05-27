@@ -58,13 +58,13 @@ public class AyarlarActivity extends AppCompatActivity {
             else if(preference instanceof RingtonePreference){
                 if(TextUtils.isEmpty(stringValue)){
                     //No ringtone
-                    preference.setSummary("Silent");
+                    preference.setSummary("Sessiz");
                 }
                 else{
                     Ringtone ringtone= RingtoneManager.getRingtone(preference.getContext(), Uri.parse(stringValue));
                     if(ringtone==null){
                         //Clear to summary
-                        preference.setSummary("Choose notification ringtone");
+                        preference.setSummary("Bildirim sesini seçin.");
                     }
                     else{
                         String name=ringtone.getTitle(preference.getContext());

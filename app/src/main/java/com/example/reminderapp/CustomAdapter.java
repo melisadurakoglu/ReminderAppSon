@@ -26,13 +26,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             super(v);
 
             this.onNoteListener = onNoteListener;
-            //Düzenlenecek layoutta
+
             notName = v.findViewById(R.id.notName);
             notIcerik = v.findViewById(R.id.notIcerik);
             notTarih = v.findViewById(R.id.notTarih);
             notSaat=v.findViewById(R.id.notSaat);
             notDurumu = v.findViewById(R.id.durum);
-            //Checkbox yeni eklendi.
             checkBox=v.findViewById(R.id.checkbox);
             v.setOnClickListener(this);
         }
@@ -64,31 +63,18 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         holder.notIcerik.setText("#"+not.getEtiket());
         holder.notTarih.setText(not.getTarih());
         holder.notSaat.setText(not.getSaat());
-        //holder.notDurumu.setText(not.getDurum());
 
         holder.checkBox.setClickable(false);
 
-       /* if(not.getDurum().equals("") && not.getSaat().equals("") && not.getTarih().equals("") && not.getYapilacak().equals("")){
-            holder.notIcerik.setVisibility(View.GONE);
-            holder.notTarih.setVisibility(View.GONE);
-            holder.notSaat.setVisibility(View.GONE);
-            holder.notName.setVisibility(View.GONE);
-        }
-*/
-
-
-
-
-
         if (not.getDurum().equals("1")){
-            //holder.notDurumu.setText("Görev Tamamlandı");
+
             holder.checkBox.setChecked(true);
-            //holder.notDurumu.setTextColor(Color.parseColor("#008000"));
+
         }
         else{
-            //holder.notDurumu.setText("Görev Tamamlanmadı");
+
             holder.checkBox.setChecked(false);
-            //holder.notDurumu.setTextColor(Color.parseColor("#FF0000"));
+
         }
     }
 
